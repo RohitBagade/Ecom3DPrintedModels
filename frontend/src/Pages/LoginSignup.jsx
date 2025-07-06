@@ -1,18 +1,91 @@
-import React from 'react'
+import { useState } from 'react'
 import './CSS/LoginSignup.css'
 
 const LoginSignup = () => {
+
+  const [state, setState] = useState("Login");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
+
+  const changeHandler = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const login = async (e) => {
+    console.log("Login function called", formData);
+    try {
+      let responseData;
+      await fetch("http://localhost:4000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }).then((response) => response.json()).then((data) => responseData = data);
+      console.log("Login response:", responseData);
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token);
+        window.location.replace("/"); // Redirect to home page after successful login
+        alert("User logged in successfully");
+        setState("Login");
+      } else {
+        alert(responseData.message);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  const signup = async () => {
+    console.log("Signup function called", formData);
+    try {
+      let responseData;
+      await fetch("http://localhost:4000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }).then((response) => response.json()).then((data) => responseData = data);
+      console.log("Signup response:", responseData);
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token);
+        window.location.replace("/"); // Redirect to home page after successful signup
+        alert("User registered successfully");
+        setState("Login");
+      } else {
+        alert(responseData.message);
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+  }
+
   return (
     <div className='loginsignup'>
       <div className='loginsignup-container'>
-        <h1>Sign Up</h1>
+        <h1>{state}</h1>
         <div className="loginsignup-fields">
-          <input type="text" placeholder='Enter your name' />
-          <input type="email" placeholder='Enter your email' />
-          <input type="password" placeholder='Enter your password' />
+          {state === "Sign Up" && <input name='username' onChange={changeHandler} type="text" placeholder='Enter your name' />}
+          <input name='email' onChange={changeHandler} type="email" placeholder='Enter your email' />
+          <input name='password' onChange={changeHandler} type="password" placeholder='Enter your password' />
         </div>
-        <button>Continue</button>
-        <p className='loginsignup-login'>Already have an account? <span>Login here</span></p>
+        <button onClick={() => (state === "Sign Up" ? signup() : login())}>Continue</button>
+        {state === "Sign Up" ? (
+          <>
+            <p className='loginsignup-login'>Already have an account? <span onClick={() => setState("Login")}>Login here</span></p>
+          </>
+        ) : (
+          <>
+            <p className='loginsignup-login'>Create an Account ? <span onClick={() => setState("Sign Up")}>Click here</span></p>
+          </>
+        )}
         <div className="loginsignup-agree">
           <input type="checkbox" name='' id=''/>
           <p>By continuing, you agree to our Terms of Service and Privacy Policy.</p>

@@ -12,44 +12,38 @@ const ProductDisplay = (props) => {
   return (
     <div className='productdisplay'>
         <div className="productdisplay-left">
+            <div className="productdisplay-img">
+                <img className='productdisplay-main-img' src={product.image} alt="" />
+            </div>
             <div className="productdisplay-img-list">
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
             </div>
-            <div className="productdisplay-img">
-                <img className='productdisplay-main-img' src={product.image} alt="" />
-            </div>
         </div>
         <div className="productdisplay-right">
-            <h1>{product.name}</h1>
-            <div className="productdisplay-right-star">
-                <img className='star' src={star_icon} alt="" />
-                <img className='star' src={star_icon} alt="" />
-                <img className='star' src={star_icon} alt="" />
-                <img className='star' src={star_icon} alt="" />
-                <img className='empty-star' src={star_icon_empty} alt="" />
-                <p>(122)</p>
+            <div className="right-up">
+                <h1>{product.name}</h1>
+                <div className="productdisplay-right-star">
+                    <img className='star' src={star_icon} alt="" />
+                    <img className='star' src={star_icon} alt="" />
+                    <img className='star' src={star_icon} alt="" />
+                    <img className='star' src={star_icon} alt="" />
+                    <img className='empty-star' src={star_icon_empty} alt="" />
+                </div>
+                <h2>Description</h2>
+                <div className='productdisplay-description'>
+                    {/* {product.description} */}
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit nihil consequatur tempore incidunt mollitia molestias et delectus ipsa fugiat recusandae quam, omnis explicabo rerum enim doloribus, praesentium suscipit magni. Eum totam placeat, fugiat vel, exercitationem ipsa odit assumenda ut amet necessitatibus aliquid dolorum qui, sit modi non nisi sint soluta aperiam a inventore? Quia nesciunt voluptatibus quibusdam reprehenderit eos. Quae magnam repellat itaque praesentium, similique, voluptatem odio quasi voluptates hic repellendus dignissimos officiis culpa! Quae laudantium laboriosam vitae laborum voluptates vero enim explicabo sint, exercitationem facilis ullam modi voluptatum illum aut consectetur id? Nisi dignissimos dicta a fugiat nesciunt sequi.
+                </div>
             </div>
-            <div className="productdisplay-prices">
-                <div className="productdisplay-price-new">${product.new_price}</div>
-                <div className="productdisplay-price-old">${product.old_price}</div>
-            </div>
-            <div className='productdisplay-description'>
-                Fuel your fitness goals with our premium Whey Protein Powder, crafted for athletes, bodybuilders,
-                and anyone serious about performance. Each scoop delivers high-quality protein to support muscle 
-                growth, faster recovery, and improved strength.
-            </div>
-            <div className="productdisplay-right-size">
-                <h1>Select Size</h1>
-                <div className="productdisplay-right-sizes">
-                    <div className="productdisplay-right-size-option">1kg</div>
-                    <div className="productdisplay-right-size-option">2kg</div>
-                    <div className="productdisplay-right-size-option">5kg</div>
-            </div>
-            <button onClick={() => addToCart(product.id)}>ADD TO CART</button>
-            <p className='productdisplay-right-category'><span>Category : </span>{product.category}</p>
+            <div className="right-down">
+                <div className="productdisplay-prices">
+                    <div className="productdisplay-price-new">&#8377;{product.new_price}</div>
+                    <div className="productdisplay-price-old">&#8377;{product.old_price}</div>
+                </div>
+                <button onClick={() => addToCart(product.id)}>ORDER NOW</button>
             </div>
         </div>
     </div>

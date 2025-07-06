@@ -1,19 +1,21 @@
 .relatedproducts{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    height: 90vh;
+    align-items: left;
+    height: 70vh;
+    margin: 0px 170px;
+    /* background-color: bisque; */
 }
 
 .relatedproducts h1{
     font-size: 50px;
     font-weight: 600;
     color: #171717;
+    /* background-color:antiquewhite */
 }
 
 .relatedproducts hr{
-    width: 200px;
+    width: 20vw;
     height: 6px;
     border-radius: 10px;
     background: #252525;
@@ -23,6 +25,7 @@
     display: flex;
     margin-top: 50px;
     gap: 30px;
+    /* background-color: azure; */
 }
 
 @media(max-width:1280px)
@@ -35,10 +38,10 @@
         font-size: 40px;
     }
 
-    .relatedproducts hr{
+    /* .relatedproducts hr{
         width: 160px;
         height: 4px;
-    }
+    } */
 
     .relatedproducts-item{
         gap: 20px;

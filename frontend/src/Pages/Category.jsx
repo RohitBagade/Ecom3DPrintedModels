@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import './CSS/Category.css'
 import { ShopContext } from '../Context/ShopContext'
 import dropdown_icon from '../Components/Assets/dropdown-icon.png'
@@ -7,6 +7,8 @@ import Item from '../Components/Item/Item'
 const Category = (props) => {
 
   const {all_product} = useContext(ShopContext);
+  console.log("🔍 all_product in Category:", all_product);
+  console.log("🔍 Category Props:", props);
 
   return (
     <div className='shop-category'>

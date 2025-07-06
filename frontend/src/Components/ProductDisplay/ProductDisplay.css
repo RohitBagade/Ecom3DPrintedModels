@@ -1,16 +1,21 @@
 .productdisplay{
     display: flex;
-    margin: 0px 170px;
+    margin: 50px 170px;
+    padding: 50px;
+    gap: 30px;
+    border-bottom: #b8b8b8 1px solid;
 }
 
 .productdisplay-left{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 17px;
+    width: 50vw;
 }
 
 .productdisplay-img-list{
     display: flex;
-    flex-direction: column;
     gap: 16px;
 }
 
@@ -19,15 +24,19 @@
 }
 
 .productdisplay-main-img{
-    width: 586px;
-    height: 700px;;
+    height: 500px;
 }
 
 .productdisplay-right{
-    margin: 0px 70px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    width: 50vw;
+    justify-content: space-between;
+}
+
+.productdisplay-description{
+    font-size: 18px;
+    font-family: "poppins";
 }
 
 .productdisplay-right h1{
@@ -36,10 +45,17 @@
     color: #3d3d3d;
 }
 
+
+.productdisplay-right h2{
+    font-size: 22px;
+    margin: 25px 0px 5px 0px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+
 .productdisplay-right-star{
     display: flex;
     align-items: center;
-    margin-top: 13px;
     gap: 5px;
     color: #1c1c1c;
     font-size: 16px;
@@ -53,9 +69,14 @@
     width: 16px;
 }
 
+.right-down{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 .productdisplay-prices{
     display: flex;
-    margin-top: 40px 0px;
     gap: 30px;
     font-size: 24px;
     font-weight: 700;
@@ -68,27 +89,6 @@
 
 .productdisplay-price-new{
     color: #ff4141;
-}
-
-.productdisplay-right-size h1{
-    margin-top: 55px;
-    color: #656565;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.productdisplay-right-sizes{
-    display: flex;
-    margin: 30px 0px;
-    gap: 20px;
-}
-
-.productdisplay-right-sizes div{
-    padding: 18px 24px;
-    background: #fbfbfb;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
-    cursor: pointer;
 }
 
 .productdisplay-right button{

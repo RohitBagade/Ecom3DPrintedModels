@@ -13,9 +13,9 @@ const Footer = () => {
             <p>SHOPPER</p>
         </div>
         <ul className='footer-links'>
-            <li>Company</li>
+            {/* <li>Company</li>
             <li>Products</li>
-            <li>Offices</li>
+            <li>Offices</li> */}
             <li>About Us</li>
             <li>Contact</li>
             <li>Privacy Policy</li>
