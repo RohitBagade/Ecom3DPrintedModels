@@ -1,13 +1,66 @@
-import React, { useContext } from 'react'
+import { useState, useRef } from 'react'
 import './ProductDisplay.css'
 import star_icon from '../Assets/star.png'
 import star_icon_empty from '../Assets/white-star.png'
-import { ShopContext } from '../../Context/ShopContext'
+import emailjs from '@emailjs/browser';
 
 const ProductDisplay = (props) => {
 
     const {product} = props;
-    const {addToCart} = useContext(ShopContext);
+    const form = useRef();
+    const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    number: '',
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitOrder();
+    emailjs
+      .sendForm('service_pzwfdii', 'template_fhivvtd', form.current, {
+        publicKey: 'j3_wZAOI5-qWNXK8Y',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+
+    console.log('Order Details:', formData);
+    setShowForm(false);
+  };
+
+  const submitOrder = async () => {
+    try {
+      let responsedata;
+      await fetch('http://localhost:4000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      }).then((response) => response.json()).then((data) => responsedata = data);
+
+      console.log("Signup response:", responsedata);
+      if (responsedata.success) {
+        alert(responsedata.message);
+      } else {
+        alert(responsedata.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error placing order");
+    }
+  };
 
   return (
     <div className='productdisplay'>
@@ -43,9 +96,44 @@ const ProductDisplay = (props) => {
                     <div className="productdisplay-price-new">&#8377;{product.new_price}</div>
                     <div className="productdisplay-price-old">&#8377;{product.old_price}</div>
                 </div>
-                <button onClick={() => addToCart(product.id)}>ORDER NOW</button>
+                <button onClick={() => setShowForm(true)}>ORDER NOW</button>
             </div>
         </div>
+        {showForm && (
+        <div className="modal-overlay">
+          <div className="modal-form">
+            <h2>Enter Details</h2>
+            <form ref={form} onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}   
+                onChange={handleInputChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              <input
+                type="number"
+                name="number"
+                placeholder="Phone Number"
+                value={formData.number}
+                onChange={handleInputChange}
+                required
+              />
+              <button type="submit" value="Send">Submit Order</button>
+              <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

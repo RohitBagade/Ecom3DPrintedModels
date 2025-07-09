@@ -301,6 +301,36 @@ app.post('/get-cart', fetchUser, async (req, res) => {
     }
 });
 
+const Contacts = mongoose.model('Contacts', {
+
+    name: {
+        type: String,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    number: {
+        type: Number,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+})
+
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, email, number } = req.body;
+        const newContact = new Contacts({ name, email, number });
+        await newContact.save();
+        res.status(201).json({ success: 1, message: "Contact added successfully" });
+    } catch (error) {
+        res.status(500).json({ success: 0, message: "Error adding contact", error: error.message });
+    }
+});
+
 app.listen(port,(e)=>{
     if(!e){
         console.log("Server Running on Port "+ port)

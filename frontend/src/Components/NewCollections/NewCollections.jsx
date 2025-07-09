@@ -7,17 +7,17 @@ const NewCollections = () => {
   const [new_collections, setNewCollections] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/new-collection')
+    fetch('http://localhost:4000/all-products')
       .then((response) => response.json())
       .then((data) => {
         setNewCollections(data);
-        console.log("Fetched New Collections:", data);
+        console.log("Fetched All Products", data);
       });
   }, []);
 
   return (
     <div className='new-collections'>
-        <h1>NEW COLLECTIONS</h1>
+        <h1>FEATURED PRODUCTS</h1>
         <hr />
         <div className="collections">
             {new_collections.map((item, i) => {
