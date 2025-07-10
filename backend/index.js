@@ -1,4 +1,5 @@
-const port = 4000;
+require('dotenv').config();
+const port = process.env.PORT || 5000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -9,11 +10,13 @@ const { request } = require("http");
 const cors = require("cors");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
 
 // Database Connection with MongoDB
-mongoose.connect("mongodb+srv://rohitbagde535:1OAJCLN5wcJqfu2Q@cluster0.mkeduwz.mongodb.net/");
-// mongoose.connect("mongodb+srv://rohitbagde535:1OAJCLN5wcJqfu2Q@cluster0.mkeduwz.mongodb.net/muscleblaze?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect(`mongodb+srv://${process.env.mongoDB_USERNAME}:${process.env.mongoDB_PASSWORD}@cluster0.mkeduwz.mongodb.net/`);
 mongoose.connection.on('connected', () => console.log('MongoDB connected ✅'));
 mongoose.connection.on('error', err => console.error('MongoDB connection error ❌', err));
 
@@ -38,8 +41,8 @@ app.post("/upload", upload.single("product"), (req, res) => {
     if (!req.file) {
         return res.status(400).send("No file uploaded.");
     }
-    const imageUrl = `http://localhost:${port}/images/${req.file.filename}`;
-    res.json({ 
+    const imageUrl = `${process.env.BACKEND_URL}/images/${req.file.filename}`;
+    res.json({
         success:1,
         image_url: imageUrl });
 });
@@ -57,10 +60,6 @@ const Product = mongoose.model("product", {
         type:String,
         required:false,
     },
-    // category:{
-    //     type:String,
-    //     required:true,
-    // },
     new_price:{
         type:Number,
         required:true,
@@ -186,7 +185,7 @@ app.post('/signup', async (req, res) => {
             }
         }
 
-        const token = jwt.sign(data, "secret_ecom");
+        const token = jwt.sign(data, process.env.JWT_SECRET);
 
         res.json({ success: 1, token, message: "User registered successfully" });
     } catch (error) {
@@ -209,7 +208,7 @@ app.post('/login', async (req, res) => {
                 id: user.id,
             }
         }
-        const token = jwt.sign(data, "secret_ecom");
+        const token = jwt.sign(data, process.env.JWT_SECRET);
         res.json({ success: 1, token, message: "User logged in successfully" });
     } catch (error) {
         res.status(500).json({ success: 0, message: "Error logging in user", error: error.message });
@@ -231,24 +230,13 @@ app.get('/new-collection', async (req, res) => {
     }
 });
 
-// app.get('/popular-protein', async (req, res) => {
-//     try {
-//         let products = await Product.find({ category: "Protein" });
-//         let popular_protein = products.slice(0,4);
-//         console.log("Popular in Protein Fetched");
-//         res.send(popular_protein);
-//     } catch (error) {
-//         res.status(500).json({ success: 0, message: "Error fetching products", error: error.message });
-//     }
-// });
-
 const fetchUser = async (req, res, next) => {
     const token = req.header('auth-token');
     if (!token) {
         return res.status(401).json({ success: 0, message: "No token provided" });
     }
     try {
-        const verified = jwt.verify(token, "secret_ecom");
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
         req.user = verified.user;
         next();
     } catch (error) {

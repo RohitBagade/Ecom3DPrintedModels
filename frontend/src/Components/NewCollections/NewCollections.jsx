@@ -7,12 +7,15 @@ const NewCollections = () => {
   const [new_collections, setNewCollections] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/all-products')
+    fetch(`${process.env.REACT_APP_API_URL}/all-products`)
+    // fetch("http://localhost:4000/all-products")
       .then((response) => response.json())
       .then((data) => {
         setNewCollections(data);
         console.log("Fetched All Products", data);
       });
+      
+            console.log("API URL:", process.env.REACT_APP_API_URL);
   }, []);
 
   return (

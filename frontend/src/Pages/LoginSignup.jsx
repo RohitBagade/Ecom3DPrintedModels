@@ -22,7 +22,7 @@ const LoginSignup = () => {
     console.log("Login function called", formData);
     try {
       let responseData;
-      await fetch("http://localhost:4000/login", {
+      await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -55,7 +55,7 @@ const LoginSignup = () => {
     console.log("Signup function called", formData);
     try {
       let responseData;
-      await fetch("http://localhost:4000/signup", {
+      await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

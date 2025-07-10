@@ -10,7 +10,7 @@ const AddProduct = () => {
         name: '',
         old_price: '',
         new_price: '',
-        // category: 'Protein',
+        description:'',
         image: ''
     });
 
@@ -36,7 +36,7 @@ const AddProduct = () => {
         console.log(image);
         formData.append('product', image);
 
-        await fetch('http://localhost:4000/upload', {
+        await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -53,7 +53,7 @@ const AddProduct = () => {
             console.log(responseData);
             product.image = responseData.image_url;
             console.log(product);
-            await fetch('http://localhost:4000/add-product', {
+            await fetch(`${import.meta.env.VITE_API_URL}/add-product`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -98,14 +98,6 @@ const AddProduct = () => {
                 <input value={productDetails.new_price} onChange={changeHandler} type="text" name='new_price' placeholder='Enter new price'/>
             </div>
         </div>
-        {/* <div className="addproduct-itemfield">
-            <p>Product Category</p>
-            <select value={productDetails.category} onChange={changeHandler} name="category" className='add-product-selector'>
-                <option value="Protein">Protein</option>
-                <option value="Creatine">Creatine</option>
-                <option value="Gainer">Gainer</option>
-            </select>
-        </div> */}
         <div className="addproduct-itemfield">
             <p>Product Description</p>
             <textarea value={productDetails.description} onChange={changeHandler} name='description' placeholder='Enter product description'></textarea>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import './NewsLetter.css';
 import Swal from 'sweetalert2';
 import emailjs from '@emailjs/browser';
@@ -42,7 +42,7 @@ const NewsLetter = () => {
   const addEmail = async (email) => {
     let Success = false;
     try {
-      const response = await fetch('http://localhost:4000/subscribe', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/subscribe`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

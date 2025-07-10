@@ -8,8 +8,8 @@ const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([])
 
   const fetchInfo = async () => {
-   
-    await fetch('http://localhost:4000/all-products').then((response) => response.json())
+
+    await fetch(`${import.meta.env.VITE_API_URL}/all-products`).then((response) => response.json())
     .then((data) => {setAllProducts(data)})
     .catch((error) => {
       console.error('Failed to fetch all products');
@@ -22,7 +22,7 @@ const ListProduct = () => {
 
   const remove_product = async (id) => {
     // This function will handle the removal of a product
-    await fetch('http://localhost:4000/remove-product', {
+    await fetch(`${import.meta.env.VITE_API_URL}/remove-product`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

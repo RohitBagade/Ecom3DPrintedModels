@@ -45,7 +45,7 @@ const ProductDisplay = (props) => {
   const submitOrder = async () => {
     try {
       let responsedata;
-      await fetch('http://localhost:4000/order', {
+      await fetch(`${process.env.REACT_APP_API_URL}/order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
