@@ -320,14 +320,41 @@ const Contacts = mongoose.model('Contacts', {
     },
 })
 
-app.post('/contact', async (req, res) => {
+app.post('/order', async (req, res) => {
     try {
         const { name, email, number } = req.body;
         const newContact = new Contacts({ name, email, number });
         await newContact.save();
-        res.status(201).json({ success: 1, message: "Contact added successfully" });
+        res.status(201).json({ success: 1, message: "Order Placed Successfully" });
     } catch (error) {
-        res.status(500).json({ success: 0, message: "Error adding contact", error: error.message });
+        res.status(500).json({ success: 0, message: "Error placing order", error: error.message });
+    }
+});
+
+
+const subscribers = mongoose.model('Subscribers', {
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+app.post('/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const newSubscriber = new subscribers({ email });
+        await newSubscriber.save();
+        res.status(201).json({ success: 1, message: "Subscribed successfully" });
+    } catch (error) {
+        if (error.code === 11000) {
+            return res.status(400).json({ success: 0, message: "Email already subscribed" });
+        }
+        res.status(500).json({ success: 0, message: "Error subscribing", error: error.message });
     }
 });
 

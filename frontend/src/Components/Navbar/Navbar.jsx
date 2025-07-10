@@ -10,17 +10,9 @@ import { Link } from 'react-router-dom';
 export const Navbar = () => {
 
     const[menu, setMenu] = useState("home");
-    // const {getTotalCartItems} = useContext(ShopContext);
     const menuRef = useRef();
 
-    // const dropdown_toggle = (e) => {
-    //     menuRef.current.classList.toggle('nav-menu-visible');
-    //     e.target.classList.toggle('open');
-    // }
-
-    // const showProducts = () => {
-    //     window.scrollBy
-    // }
+    
 
   return (
     <div className='navbar'>

@@ -3,12 +3,11 @@
     justify-content: space-around;
     padding: 16px;
     gap: 350px;
-    box-shadow: 0 2px 15px -2px black;
+    box-shadow: 0 2px 15px -2px rgb(255, 255, 255);
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
-    width: 100%;
     background: white;
 }
 
@@ -62,16 +61,16 @@ button{
     cursor: pointer;
 }
 
-.nav-login-cart button:active{
+/* .nav-login-cart button:active{
     background: #f3f3f3;
 }
 
 .nav-login-cart img{
     width: 40px;
     height: 40px;
-}
+} */
 
-.nav-cart-count{
+/* .nav-cart-count{
     width: 22px;
     height: 22px;
     display: flex;
@@ -83,11 +82,11 @@ button{
     font-size: 11px;
     background: red;
     color: white;
-}
-
+} */
+/* 
 .nav-dropdown{
     display: none;
-}
+} */
 
 @media (max-width: 1280px) {
     .navbar{

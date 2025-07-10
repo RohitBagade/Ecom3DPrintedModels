@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState,useRef } from 'react'
 import './ProductDisplay.css'
 import star_icon from '../Assets/star.png'
 import star_icon_empty from '../Assets/white-star.png'
@@ -9,19 +9,20 @@ const ProductDisplay = (props) => {
     const {product} = props;
     const form = useRef();
     const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    number: '',
-  });
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        number: '',
+    });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submitOrder();
+    await submitOrder();
+
     emailjs
       .sendForm('service_pzwfdii', 'template_fhivvtd', form.current, {
         publicKey: 'j3_wZAOI5-qWNXK8Y',
@@ -31,18 +32,19 @@ const ProductDisplay = (props) => {
           console.log('SUCCESS!');
         },
         (error) => {
-          console.log('FAILED...', error.text);
+          console.log('FAILED...', error);
         },
       );
 
-    console.log('Order Details:', formData);
+    form.current.reset();
+    setFormData({ name: '', email: '', number: '' });
     setShowForm(false);
   };
 
   const submitOrder = async () => {
     try {
       let responsedata;
-      await fetch('http://localhost:4000/contact', {
+      await fetch('http://localhost:4000/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,12 +70,12 @@ const ProductDisplay = (props) => {
             <div className="productdisplay-img">
                 <img className='productdisplay-main-img' src={product.image} alt="" />
             </div>
-            <div className="productdisplay-img-list">
+            {/* <div className="productdisplay-img-list">
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
                 <img src={product.image} alt="" />
-            </div>
+            </div> */}
         </div>
         <div className="productdisplay-right">
             <div className="right-up">
@@ -87,8 +89,8 @@ const ProductDisplay = (props) => {
                 </div>
                 <h2>Description</h2>
                 <div className='productdisplay-description'>
-                    {/* {product.description} */}
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit nihil consequatur tempore incidunt mollitia molestias et delectus ipsa fugiat recusandae quam, omnis explicabo rerum enim doloribus, praesentium suscipit magni. Eum totam placeat, fugiat vel, exercitationem ipsa odit assumenda ut amet necessitatibus aliquid dolorum qui, sit modi non nisi sint soluta aperiam a inventore? Quia nesciunt voluptatibus quibusdam reprehenderit eos. Quae magnam repellat itaque praesentium, similique, voluptatem odio quasi voluptates hic repellendus dignissimos officiis culpa! Quae laudantium laboriosam vitae laborum voluptates vero enim explicabo sint, exercitationem facilis ullam modi voluptatum illum aut consectetur id? Nisi dignissimos dicta a fugiat nesciunt sequi.
+                    {product.description}
+                    {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit nihil consequatur tempore incidunt mollitia molestias et delectus ipsa fugiat recusandae quam, omnis explicabo rerum enim doloribus, praesentium suscipit magni. Eum totam placeat, fugiat vel, exercitationem ipsa odit assumenda ut amet necessitatibus aliquid dolorum qui, sit modi non nisi sint soluta aperiam a inventore? Quia nesciunt voluptatibus quibusdam reprehenderit eos. Quae magnam repellat itaque praesentium, similique, voluptatem odio quasi voluptates hic repellendus dignissimos officiis culpa! Quae laudantium laboriosam vitae laborum voluptates vero enim explicabo sint, exercitationem facilis ullam modi voluptatum illum aut consectetur id? Nisi dignissimos dicta a fugiat nesciunt sequi. */}
                 </div>
             </div>
             <div className="right-down">
@@ -128,6 +130,7 @@ const ProductDisplay = (props) => {
                 onChange={handleInputChange}
                 required
               />
+              <input type="hidden" name="product_name" value={product.name} />
               <button type="submit" value="Send">Submit Order</button>
               <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
             </form>

@@ -4,14 +4,12 @@
     align-items: left;
     height: 70vh;
     margin: 0px 170px;
-    /* background-color: bisque; */
 }
 
 .relatedproducts h1{
     font-size: 50px;
     font-weight: 600;
     color: #171717;
-    /* background-color:antiquewhite */
 }
 
 .relatedproducts hr{

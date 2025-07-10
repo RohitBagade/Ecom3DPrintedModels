@@ -8,7 +8,7 @@
     margin: auto;
     padding: 0px 140px;
     margin-bottom: 150px;
-    background: linear-gradient(180deg, #fde1ff 0%, #e1ffea22 60%);
+    background: linear-gradient(180deg, #ffffff 0%, #00000022 100%);
     gap: 30;
 }
 
@@ -23,7 +23,7 @@
     color: #454545;
 }
 
-.newsletter div{
+.newsletter form{
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -45,7 +45,7 @@
     color: #616161;
 }
 
-.newsletter div button{
+.newsletter form button{
     width: 210px;
     height: 70px;
     border-radius: 80px;
@@ -71,16 +71,16 @@
         font-size: 16px;
     }
 
-    .newsletter div{
+    .newsletter form{
         width: 600px;
         height: 60px;
     }
 
-    .newsletter div input{
+    .newsletter form input{
         width: 400px;
     }
 
-    .newsletter div button{
+    .newsletter form button{
         width: 160px;
         height: 60px;
     }
@@ -101,17 +101,17 @@
         font-size: 14px;
     }
 
-    .newsletter div{
+    .newsletter form{
         width: 500px;
         height: 50px;
     }
 
-    .newsletter div input{
+    .newsletter form input{
         width: 300px;
         font-size: 14px;
     }
 
-    .newsletter div button{
+    .newsletter form button{
         width: 120px;
         height: 50px;
         font-size: 14px;
@@ -133,17 +133,17 @@
         font-size: 12px;
     }
 
-    .newsletter div{
+    .newsletter form{
         width: 400px;
         height: 40px;
     }
 
-    .newsletter div input{
+    .newsletter form input{
         width: 200px;
         font-size: 13px;
     }
 
-    .newsletter div button{
+    .newsletter form button{
         width: 100px;
         height: 40px;
         font-size: 13px;
@@ -169,11 +169,11 @@
         text-align: center;
     }
 
-    .newsletter div{
+    .newsletter form{
         width: 290px;
     }
 
-    .newsletter div input{
+    .newsletter form input{
         width: 130px;
     }
 }

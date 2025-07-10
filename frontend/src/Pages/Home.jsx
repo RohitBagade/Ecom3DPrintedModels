@@ -6,6 +6,7 @@ import NewCollections from '../Components/NewCollections/NewCollections'
 import NewsLetter from '../Components/NewsLetter/NewsLetter'
 
 const Home = () => {
+
   return (
     <div>
       <Hero />

@@ -11,7 +11,6 @@ const RelatedProducts = (props) => {
   return (
     <div className='relatedproducts'>
       <h1>People Also Like...</h1>
-      <hr />
       <div className="relatedproducts-item">
         {all_product.map((item) => {
           if (item.id !== product.id) {
