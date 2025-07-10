@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from "react";
-// import all_product from "../../src/Components/Assets/all_product.js";
+import Swal from 'sweetalert2';
 
 export const ShopContext = createContext(null);
 
@@ -39,7 +39,11 @@ const ShopContextProvider = (props) => {
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         if(localStorage.getItem("auth-token") === null) {
-            alert("Please login to add items to the cart");
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Required',
+                text: "Please login to add items to the cart",
+            });
             return;
         }
         fetch('http://localhost:4000/add-to-cart', {
@@ -54,9 +58,17 @@ const ShopContextProvider = (props) => {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                alert("Item added to cart successfully");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Item Added',
+                    text: "Item added to cart successfully",
+                });
             } else {
-                alert(data.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message,
+                });
             }
         });
     }
@@ -64,7 +76,11 @@ const ShopContextProvider = (props) => {
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if(localStorage.getItem("auth-token") === null) {
-            alert("Please login to remove items from the cart");
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Required',
+                text: "Please login to remove items from the cart",
+            });
             return;
         }
         fetch('http://localhost:4000/remove-from-cart', {
@@ -79,9 +95,17 @@ const ShopContextProvider = (props) => {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                alert("Item removed from cart successfully");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Item Removed',
+                    text: "Item removed from cart successfully",
+                });
             } else {
-                alert(data.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message,
+                });
             }
         });
     }

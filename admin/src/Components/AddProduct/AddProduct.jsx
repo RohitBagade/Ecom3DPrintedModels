@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload-area.png'
+import Swal from 'sweetalert2'
 
 const AddProduct = () => {
 
@@ -62,9 +63,17 @@ const AddProduct = () => {
             }).then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    alert("Product added successfully");
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product Added',
+                        text: "Product added successfully",
+                    });
                 } else {
-                    alert("Failed to add product");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Add Product',
+                        text: data.message || "An error occurred",
+                    });
                     console.error(data.message);
                 }
             }).catch((error) => {

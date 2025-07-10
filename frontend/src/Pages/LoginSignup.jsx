@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './CSS/LoginSignup.css'
+import Swal from 'sweetalert2'
 
 const LoginSignup = () => {
 
@@ -32,10 +33,18 @@ const LoginSignup = () => {
       if (responseData.success) {
         localStorage.setItem("auth-token", responseData.token);
         window.location.replace("/"); // Redirect to home page after successful login
-        alert("User logged in successfully");
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: "User logged in successfully",
+        });
         setState("Login");
       } else {
-        alert(responseData.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: responseData.message,
+        });
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -57,10 +66,18 @@ const LoginSignup = () => {
       if (responseData.success) {
         localStorage.setItem("auth-token", responseData.token);
         window.location.replace("/"); // Redirect to home page after successful signup
-        alert("User registered successfully");
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          text: "User registered successfully",
+        });
         setState("Login");
       } else {
-        alert(responseData.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Failed',
+          text: responseData.message,
+        });
       }
     } catch (error) {
       console.error("Error during signup:", error);

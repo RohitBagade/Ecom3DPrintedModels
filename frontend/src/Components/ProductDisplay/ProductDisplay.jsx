@@ -2,7 +2,8 @@ import { useState,useRef } from 'react'
 import './ProductDisplay.css'
 import star_icon from '../Assets/star.png'
 import star_icon_empty from '../Assets/white-star.png'
-import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2'
 
 const ProductDisplay = (props) => {
 
@@ -54,13 +55,25 @@ const ProductDisplay = (props) => {
 
       console.log("Signup response:", responsedata);
       if (responsedata.success) {
-        alert(responsedata.message);
+        Swal.fire({
+          icon: 'success',
+          title: 'Order Placed',
+          text: responsedata.message,
+        });
       } else {
-        alert(responsedata.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Order Failed',
+          text: responsedata.message,
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error placing order");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Error placing order",
+      });
     }
   };
 

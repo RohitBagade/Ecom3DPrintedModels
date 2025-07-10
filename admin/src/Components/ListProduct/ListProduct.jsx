@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './ListProduct.css'
 import remove_icon from '../../assets/cancel.png'
+import Swal from 'sweetalert2'
 
 const ListProduct = () => {
 
@@ -32,10 +33,18 @@ const ListProduct = () => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert("Product removed successfully");
+        Swal.fire({
+          icon: 'success',
+          title: 'Product Removed',
+          text: "Product removed successfully.",
+        });
         fetchInfo();
       } else {
-        alert("Failed to remove product");
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to Remove Product',
+          text: data.message || "An error occurred",
+        });
       }
     }).catch((error) => {
       console.error('Error removing product:', error);
