@@ -10,8 +10,10 @@ const { request } = require("http");
 const cors = require("cors");
 
 app.use(express.json());
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: [ process.env.FRONTEND_URL, // frontend
+  process.env.ADMIN_URL ],
   credentials: true,
 }));
 

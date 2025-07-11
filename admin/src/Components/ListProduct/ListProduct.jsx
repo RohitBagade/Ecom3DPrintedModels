@@ -8,15 +8,15 @@ const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([])
 
   const fetchInfo = async () => {
-
     await fetch(`${import.meta.env.VITE_API_URL}/all-products`).then((response) => response.json())
     .then((data) => {setAllProducts(data)})
     .catch((error) => {
       console.error('Failed to fetch all products');
     });
   }
-
+  
   useEffect(() => {
+    console.log(import.meta.env.VITE_API_URL)
     fetchInfo();
   }, []);
 
