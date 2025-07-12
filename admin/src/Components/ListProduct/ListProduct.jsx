@@ -55,7 +55,7 @@ const ListProduct = () => {
     <div className="list-product">
       <h1>All Products List</h1>
       <div className="listproduct-format-main">
-        <p>Products</p>
+        <p className='listproduct-img'>Products</p>
         <p>Title</p>
         <p>Old Price</p>
         <p>New Price</p>
